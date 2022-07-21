@@ -34,12 +34,12 @@
   			bm.boardcode = #{boardcode}
   	</select>
   	
-  	<select id="getBoardListOfPage" parameterType="Integer" resultType="com.springcoot.studyjiseok.domain.board.Board">
+  	<select id="getBoardListOfIndex" parameterType="Integer" resultType="com.springcoot.studyjiseok.domain.board.Board">
   		select
   			bm.boardcode,
   			bm.title,
   			bm.usercode,
-  			bm.username,
+  			um.username,
   			bm.content,
   			bm.createdate,
   			bm.updatedate

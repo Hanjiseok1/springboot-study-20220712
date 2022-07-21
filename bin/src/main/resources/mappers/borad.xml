@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.springcoot.studyjiseok.domain.board.BoardRepository">
+  	<insert id="save" parameterType="com.springcoot.studyjiseok.domain.board.Board"
+  		useGeneratedKeys="true" keyProperty="boardcode">
+  		insert into
+  			board_mst
+  		values(
+  			0,
+  			#{title},
+  			#{usercode},
+  			#{content},
+  			now(),
+  			now()
+  		)
+  	</insert>
+  	
+  	<select id="findBoardByBoardcode" parameterType="Integer" resultType="com.springcoot.studyjiseok.domain.board.Board">
+  		select
+  			bm.boardcode,
+  			bm.title,
+  			bm.usercode,
+  			um.username,
+  			bm.content,
+  			bm.createdate,
+  			bm.updatedate
+  		from
+  			board_mst bm
+  			left outer join user_mst um on (um.usercode = bm.usercode)
+  		where
+  			bm.boardcode = #{boardcode}
+  	</select>
+  	
+  	<select id="getBoardListOfPage" parameterType="Integer" resultType="com.springcoot.studyjiseok.domain.board.Board">
+  		select
+  			bm.boardcode,
+  			bm.title,
+  			bm.usercode,
+  			bm.username,
+  			bm.content,
+  			bm.createdate,
+  			bm.updatedate
+  		from
+  			board_mst bm
+  			left outer join user_mst um on (um.usercode = bm.usercode)
+  		order by
+  			bm.createdate desc,
+  			bm.boardcode desc
+  		limit #{index}, 10
+  	</select>
+  </mapper>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
